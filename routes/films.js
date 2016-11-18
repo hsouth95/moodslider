@@ -3,6 +3,8 @@ var INPUT_FILE_PATH = "data/input.xml",
     xml = require('xml'),
     fs = require('fs'),
     xml2js = require("xml2js"),
+    Film = require("../objects/Film.js"),
+    FilmList = require("../objects/FilmList.js"),
     router = express.Router(),
     films = null;
 
@@ -17,7 +19,7 @@ readInput = function(){
                if(err){
     			   films = null;
     		   } else {
-    			   films = result;
+    			   films = new FilmList(result.programmeList.programme);
     		   }
     	   });
         }
@@ -26,37 +28,29 @@ readInput = function(){
 
 router.post('/', function(req, res){
     if(req.busboy) {
-        req.pipe(req.busboy);
+        var film = {};
+
         req.busboy.on("file", function(fieldName, file, fileName, encoding, mimeType){
-            var newPath = "data/images/" + fileName;
-
-            fStream = fs.createWriteStream(newPath);
-
+            var newPath = "data/images/" + fileName,
+                fStream = fs.createWriteStream(newPath);
+            film.image = [newPath];
             file.pipe(fStream);
+        });
+        req.busboy.on("field", function(fieldName, value, keyTruncated, valueTruncated) {
+            switch (fieldName) {
+                // Allowed fields
+                case "name":
+                case "mood":
+                    film[fieldName] = [value.toString()];
+                    break;
+            }
+        });
+        req.busboy.on("finish", function(){
+            films.addFilm(new Film(film));
 
-            fStream.on("close", function(){
-                var film = {};
-                // Think about ID.
-                // Wrapping attributes in arrays for better XML conversion
-                film.$ = {};
-                film.$.id = '99';
-                film.name = [req.name];
-                film.image = [newPath];
-                film.mood = [req.mood];
-
-                if(!films){
-                    films = {};
-                    films.programmeList = {};
-                    films.programmeList.programme = [];
-                }
-
-                films.programmeList.programme.push(film);
-                console.log(JSON.stringify(films));
-                res.status(200).send("OK!");
-            });
+            res.status(200);
         });
     } else {
-        console.log("No busboy!");
         res.status(404).send("Busboy not loaded");
     }
 });
@@ -68,10 +62,8 @@ router.get('/', function(req, res, next) {
 	  return res.status(404).send("Input not found");
   }
 
-  var builder = new xml2js.Builder(),
-	  filmsXml = builder.buildObject(films);
-
-  res.send(xml(filmsXml));
+  var builder = new xml2js.Builder();
+  res.send(xml(films.toXml(builder)));
 });
 
 readInput();

@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  form(method="post", action="/films", enctype="multipart/form-data")
+    input(type="text", name="name", placeholder="Enter name here.")
+    input(type="text", name="mood", placeholder="Enter mood here.")
+    input(type="file" name="file" accept="image/*")
+    input(type="submit", value="add")
