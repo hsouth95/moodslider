@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <programmeList>
+ <programme id="1">
+ <name>Alice in Wonderland</name>
+ <image>images/alice_in_wonderland.jpg</image>
+ <mood>Calm</mood>
+ </programme>
+ <programme id="2">
+ <name>Avatar</name>
+ <image>images/avatar.jpg</image>
+ <mood>Fearless</mood>
+ </programme>
+ <programme id="3">
+ <name>Bruce Almighty</name>
+ <image>images/bruceAlmighty.jpg</image>
+ <mood>Tired</mood>
+ </programme>
+</programmeList>
