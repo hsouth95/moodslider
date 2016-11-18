@@ -5,6 +5,7 @@ var INPUT_FILE_PATH = "data/input.xml",
     xml2js = require("xml2js"),
     Film = require("../objects/Film.js"),
     FilmList = require("../objects/FilmList.js"),
+    Mood = require("../objects/Mood.js"),
     router = express.Router(),
     films = null;
 
@@ -26,9 +27,11 @@ readInput = function(){
 	});
 }
 
+/* POST films */
 router.post('/', function(req, res){
     if(req.busboy) {
-        var film = {};
+        var film = {},
+            mood = {};
 
         req.busboy.on("file", function(fieldName, file, fileName, encoding, mimeType){
             var newPath = "data/images/" + fileName,
@@ -40,15 +43,21 @@ router.post('/', function(req, res){
             switch (fieldName) {
                 // Allowed fields
                 case "name":
-                case "mood":
                     film[fieldName] = [value.toString()];
+                    break;
+                case "calm":
+                case "sad":
+                case "awake":
+                case "courage":
+                    mood[fieldName] = parseInt(value);
                     break;
             }
         });
         req.busboy.on("finish", function(){
+            film.mood = new Mood(mood.calm, mood.sad, mood.awake, mood.courage);
             films.addFilm(new Film(film));
 
-            res.status(200);
+            res.status(200).send("OK!");
         });
     } else {
         res.status(404).send("Busboy not loaded");

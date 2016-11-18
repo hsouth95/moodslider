@@ -2,15 +2,15 @@
  * @file FilmList class for containing and manipulating the films
  * @copyright Harrison South 2016
  */
- 
+
 /**
  * Represents a list of films.
  * @constructor
  * @param {Object[]} films - A collection of films
  */
 var FilmList = function (films) {
-    this._films = films || null;
-    this._highestId = parseInt(this.getLatestId());
+    this.films = films || null;
+    this.latestId = parseInt(this.getLatestId());
 }
 
 /**
@@ -18,12 +18,12 @@ var FilmList = function (films) {
  * @returns {Number} Latest ID in the collection of films
  */
 FilmList.prototype.getLatestId = function(){
-    if(this._highestId) {
-        return this._highestId;
+    if(this.latestId) {
+        return this.latestId;
     }
 
-    if(this._films && this._films.length > 0) {
-        return this._films.reduce(function(highestId, film) {
+    if(this.films && this.films.length > 0) {
+        return this.films.reduce(function(highestId, film) {
             return highestId > film.$.id ? highestId : film.$.id;
         }, 0);
     }
@@ -36,7 +36,7 @@ FilmList.prototype.getLatestId = function(){
  * @returns {Object[]} Collection of films
  */
 FilmList.prototype.getFilms = function(){
-    return this._films;
+    return this.films;
 }
 
 /**
@@ -45,14 +45,14 @@ FilmList.prototype.getFilms = function(){
  */
 FilmList.prototype.addFilm = function(film){
     if(film) {
-        if(!this._films) {
-            this._films = [];
+        if(!this.films) {
+            this.films = [];
         }
 
-        film.$.id = parseInt(this.getHighestId()) + 1;
-        this._highestId = parseInt(this._highestId) + 1;
+        film.$.id = parseInt(this.getLatestId()) + 1;
+        this.latestId = parseInt(this.latestId) + 1;
 
-        this._films.push(film);
+        this.films.push(film);
     }
 }
 
@@ -62,11 +62,11 @@ FilmList.prototype.addFilm = function(film){
  * @returns {Object} Returns the collections of films in a XML format
  */
 FilmList.prototype.toXml = function(builder){
-    if(this._films && builder){
+    if(this.films && builder){
         // Build object to simulate how XML would be structured
         var xmlObj = {};
         xmlObj.programmeList = {};
-        xmlObj.programmeList.programme = this._films;
+        xmlObj.programmeList.programme = this.films;
 
         var filmXml = builder.buildObject(xmlObj);
         return filmXml;
