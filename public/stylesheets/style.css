@@ -7,7 +7,10 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: rgb(0, 115, 197);
+  text-decoration: none;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 header {
@@ -71,6 +74,13 @@ nav {
 }
 .film-title {
     max-width: 200px;
+}
+
+.input {
+  margin-bottom: 30px;
+}
+.input label {
+  margin-right: 50px;
 }
 
 #body-wrapper {

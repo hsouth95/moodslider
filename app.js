@@ -23,6 +23,7 @@ app.use(busboy({
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use("/data", express.static(path.join(__dirname, "data")));
 
 app.use('/', index);
 app.use('/films', films);

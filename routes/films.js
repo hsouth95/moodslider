@@ -36,7 +36,7 @@ router.post('/', function(req, res){
         var film = {},
             mood = {};
 
-        req.busboy.on("file", function(fieldName, file, fileName, encoding, mimeType){
+        req.busboy.on("file", function(fieldName, file, fileName){
             var newPath = "data/images/" + fileName,
                 fStream = fs.createWriteStream(newPath);
             film.image = [newPath];
@@ -65,7 +65,7 @@ router.post('/', function(req, res){
 
             inputFile.updateInputFile(films);
 
-            res.status(200).end();
+            res.redirect("/");
         });
     } else {
         res.status(404).send("Busboy not loaded");
@@ -92,7 +92,12 @@ router.get('/', function(req, res, next) {
       returnedFilms = films.getFilmsByMood(mood, 5);
   }
 
-  res.send(xml(returnedFilms.toXml()));
+  if (req.query.responseType && req.query.responseType.toLowerCase() === "xml"){
+      res.send(xml(returnedFilms.toXml())).end();
+      return;
+  }
+
+  res.json(returnedFilms.getFilms());
 });
 
 module.exports = router;

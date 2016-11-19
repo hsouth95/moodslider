@@ -37,8 +37,8 @@ InputFile.prototype.readInput = function(successCallback, errorCallback){
                    if(errorCallback && typeof errorCallback === "function") {
                        errorCallback(err)
                    }
-    		   } else {
-    			   if(successCallback && typeof successCallback === "function") {
+		           } else {
+    			          if(successCallback && typeof successCallback === "function") {
                        successCallback(result.programmeList.programme);
                    }
     		   }
@@ -56,7 +56,9 @@ InputFile.prototype.readInput = function(successCallback, errorCallback){
  */
 InputFile.prototype.updateInputFile = function(films, successCallback, errorCallback){
     if(films) {
-        fs.unlink(INPUT_FILE_PATH, function(err){
+        // We're going through different scopes and therefore need a reference to the object
+        var that = this;
+        fs.unlink(that.filePath, function(err){
             // Ignore error if no file already exists
             if(err && err.code !== "ENOENT") {
                 if(errorCallback && typeof errorCallback === "function") {
@@ -64,7 +66,7 @@ InputFile.prototype.updateInputFile = function(films, successCallback, errorCall
                 }
             }
 
-            fs.writeFile(INPUT_FILE_PATH, films.toXml(), function(err){
+            fs.writeFile(that.filePath, films.toXml(), function(err){
                 if(err){
                     if(errorCallback && typeof errorCallback === "function") {
                         errorCallback(err);

@@ -1,12 +1,24 @@
 extends layout
 
 block content
-  h1= title
+  h1 Add a Film
   form(method="post", action="/films", enctype="multipart/form-data")
-    input(type="text", name="name", placeholder="Enter name here.")
-    input(type="number", name="calm")
-    input(type="number", name="sad")
-    input(type="number", name="awake")
-    input(type="number", name="courage")
-    input(type="file" name="file" accept="image/*")
-    input(type="submit", value="add")
+    .input
+        label(for="name") Film Title
+        input(type="text", id="name" name="name", placeholder="Enter title...", required)
+    .input
+        label(for="calm") How calm is this film? (1-9)
+        input(type="number", id="calm" name="calm", min="1", max="9", required)
+    .input
+        label(for="sad") How sad is this film? (1-9)
+        input(type="number", id="sad" name="sad", min="1", max="9", required)
+    .input
+        label(for="awake") How awake do you need to be for this film? (1-9)
+        input(type="number", id="awake" name="awake", min="1", max="9", required)
+    .input
+        label(for="courage") How scary is this film? (1-9)
+        input(type="number", id="courage" name="courage", min="1", max="9", required)
+    .input
+        input(type="file", name="file", accept="image/*", multiple="false", required)
+    .input
+        input(type="submit", value="Add Film")

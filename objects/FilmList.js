@@ -24,14 +24,12 @@ var FilmList = function (films) {
  * @returns {Object} A list of the films
  */
 FilmList.prototype.getFilmsByMood = function(mood, limit) {
-    console.log(JSON.stringify(this.films));
-    var sortedFilms = this.films.sort(function(a, b) {
-        a.getMoodDifference(mood) < b.getMoodDifference(mood);
+    // Sort array descendingly
+    var sortedFilms = Array.prototype.slice.call(this.films).sort(function(a, b) {
+        return b.getMoodDifference(mood) > a.getMoodDifference(mood);
     });
 
-    console.log("Finished sorting.......");
-    console.log(JSON.stringify(this.films));
-    return new FilmList(sortedFilms);
+    return new FilmList(sortedFilms.slice(0, limit));
 }
 
 /**

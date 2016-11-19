@@ -3,7 +3,7 @@
  * @copyright Harrison South 2016
  */
 
-var MAX_MOOD_VALUE = 10;
+var MAX_MOOD_VALUE = 9;
 
 /**
  * Represents a mood.
