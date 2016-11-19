@@ -33,19 +33,19 @@
   <programme id="4">
     <name>yolo</name>
     <mood>
-      <calmLevel>2</calmLevel>
-      <sadnessLevel>1</sadnessLevel>
-      <awakeLevel>1</awakeLevel>
-      <courageLevel>3</courageLevel>
+      <calmLevel>5</calmLevel>
+      <sadnessLevel>10</sadnessLevel>
+      <awakeLevel>10</awakeLevel>
+      <courageLevel>10</courageLevel>
     </mood>
     <image>data/images/20160314_132016.jpg</image>
   </programme>
   <programme id="5">
     <name>yolo</name>
     <mood>
-      <calmLevel>2</calmLevel>
-      <sadnessLevel>1</sadnessLevel>
-      <awakeLevel>1</awakeLevel>
+      <calmLevel>10</calmLevel>
+      <sadnessLevel>5</sadnessLevel>
+      <awakeLevel>4</awakeLevel>
       <courageLevel>3</courageLevel>
     </mood>
     <image>data/images/20160314_132016.jpg</image>

@@ -4,6 +4,7 @@
  */
 
 var xml2js = require("xml2js"),
+    Film = require("../objects/Film.js");
     builder = new xml2js.Builder();
 
 /**
@@ -14,6 +15,23 @@ var xml2js = require("xml2js"),
 var FilmList = function (films) {
     this.films = films || [];
     this.latestId = parseInt(this.getLatestId());
+}
+
+/**
+ * Retrieves a list of films based on a given mood
+ * @param {Object} mood - The mood to base the selection on
+ * @param {Number} limit - The number of films to return
+ * @returns {Object} A list of the films
+ */
+FilmList.prototype.getFilmsByMood = function(mood, limit) {
+    console.log(JSON.stringify(this.films));
+    var sortedFilms = this.films.sort(function(a, b) {
+        a.getMoodDifference(mood) < b.getMoodDifference(mood);
+    });
+
+    console.log("Finished sorting.......");
+    console.log(JSON.stringify(this.films));
+    return new FilmList(sortedFilms);
 }
 
 /**

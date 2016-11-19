@@ -26,7 +26,7 @@ var Mood = function(calmLevel, sadnessLevel, awakeLevel, courageLevel) {
  * @returns {Number} The converted mood value
  */
 Mood.prototype.getMoodValue = function(value) {
-    if(Number.isNaN(value)) {
+    if(typeof value === "undefined" || Number.isNaN(value)) {
         // Error with value, therefore set to default value
         return 5;
     }

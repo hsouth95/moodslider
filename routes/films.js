@@ -12,7 +12,19 @@ var INPUT_FILE_PATH = "data/input.xml",
     films = null;
 
 inputFile.readInput(function(data){
-    films = new FilmList(data);
+    filmData = data.map(function(a) {
+      return new Film({
+        id: a.$.id,
+        name: a.name,
+        mood: new Mood(a.mood.calmLevel,
+            a.mood.sadnessLevel,
+            a.mood.awakeLevel,
+            a.mood.courageLevel),
+        image: a.image
+      });
+    });
+
+    films = new FilmList(filmData);
 },
 function(){
     films = new FilmList();
@@ -52,7 +64,7 @@ router.post('/', function(req, res){
             films.addFilm(new Film(film));
 
             inputFile.updateInputFile(films);
-            
+
             res.status(200).end();
         });
     } else {
@@ -67,7 +79,20 @@ router.get('/', function(req, res, next) {
 	  return res.status(404).send("Input not found");
   }
 
-  res.send(xml(films.toXml()));
+  var returnedFilms = films;
+
+  // Check for mood queries
+  if(req.query.calm || req.query.sad || req.query.awake || req.query.courage) {
+      var mood = new Mood(
+        req.query.calm,
+        req.query.sad,
+        req.query.awake,
+        req.query.courage
+      );
+      returnedFilms = films.getFilmsByMood(mood, 5);
+  }
+
+  res.send(xml(returnedFilms.toXml()));
 });
 
 module.exports = router;

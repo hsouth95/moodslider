@@ -28,8 +28,9 @@ nav {
 }
 
 .logo img {
-    max-height: 200px;
+    max-height: 150px;
     height: auto;
+    width: auto;
 }
 
 .mood-value {
@@ -37,15 +38,14 @@ nav {
     padding-right: 20px;
     font-weight: bold;
 }
+
 .mood-value-high {
     text-align: right;
 }
 
-
 .title {
     text-align: center;
-    font-size: 50px;
-    height: 50%;
+    font-size: 40px;
     font-family: 'Ubuntu', sans-serif; /* Override 'pure' css */
     color: rgb(0, 115, 197);
 }
