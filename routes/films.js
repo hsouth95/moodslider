@@ -6,26 +6,17 @@ var INPUT_FILE_PATH = "data/input.xml",
     Film = require("../objects/Film.js"),
     FilmList = require("../objects/FilmList.js"),
     Mood = require("../objects/Mood.js"),
+    InputFile = require("../objects/InputFile.js"),
     router = express.Router(),
+    inputFile = new InputFile(INPUT_FILE_PATH),
     films = null;
 
-/** Read the input data and caches the result */
-readInput = function(){
-    var parser = new xml2js.Parser();
-	fs.readFile(INPUT_FILE_PATH, "utf8", function(err, data){
-	   if(err) {
-		   films = null;
-	   } else {
-    	   parser.parseString(data, function(err, result) {
-               if(err){
-    			   films = null;
-    		   } else {
-    			   films = new FilmList(result.programmeList.programme);
-    		   }
-    	   });
-        }
-	});
-}
+inputFile.readInput(function(data){
+    films = new FilmList(data);
+},
+function(){
+    films = new FilmList();
+});
 
 /* POST films */
 router.post('/', function(req, res){
@@ -54,10 +45,15 @@ router.post('/', function(req, res){
             }
         });
         req.busboy.on("finish", function(){
+            if(!films) {
+                films = new FilmList();
+            }
             film.mood = new Mood(mood.calm, mood.sad, mood.awake, mood.courage);
             films.addFilm(new Film(film));
 
-            res.status(200).send("OK!");
+            inputFile.updateInputFile(films);
+            
+            res.status(200).end();
         });
     } else {
         res.status(404).send("Busboy not loaded");
@@ -71,9 +67,7 @@ router.get('/', function(req, res, next) {
 	  return res.status(404).send("Input not found");
   }
 
-  var builder = new xml2js.Builder();
-  res.send(xml(films.toXml(builder)));
+  res.send(xml(films.toXml()));
 });
 
-readInput();
 module.exports = router;

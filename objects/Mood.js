@@ -3,6 +3,8 @@
  * @copyright Harrison South 2016
  */
 
+var MAX_MOOD_VALUE = 10;
+
 /**
  * Represents a mood.
  * @constructor
@@ -12,8 +14,6 @@
  * @param {Number} courageLevel - How fearless a person is, 0 = scared, 10 = fearless
  */
 var Mood = function(calmLevel, sadnessLevel, awakeLevel, courageLevel) {
-    this.MAX_VALUE = 10;
-
     this.calmLevel = this.getMoodValue(calmLevel);
     this.sadnessLevel = this.getMoodValue(sadnessLevel);
     this.awakeLevel = this.getMoodValue(awakeLevel);
@@ -34,8 +34,8 @@ Mood.prototype.getMoodValue = function(value) {
     value = Math.round(value);
     if(value <= 0) {
         return 1;
-    } else if (value > this.MAX_VALUE) {
-        return this.MAX_VALUE;
+    } else if (value > MAX_MOOD_VALUE) {
+        return MAX_MOOD_VALUE;
     } else {
         return value;
     }

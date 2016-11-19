@@ -3,13 +3,16 @@
  * @copyright Harrison South 2016
  */
 
+var xml2js = require("xml2js"),
+    builder = new xml2js.Builder();
+
 /**
  * Represents a list of films.
  * @constructor
- * @param {Object[]} films - A collection of films
+ * @param {Object[]} [films] - A collection of films
  */
 var FilmList = function (films) {
-    this.films = films || null;
+    this.films = films || [];
     this.latestId = parseInt(this.getLatestId());
 }
 
@@ -28,7 +31,7 @@ FilmList.prototype.getLatestId = function(){
         }, 0);
     }
 
-    return null;
+    return 0;
 }
 
 /**
@@ -58,18 +61,16 @@ FilmList.prototype.addFilm = function(film){
 
 /**
  * Retrieves the collection of films in a XML friendly format
- * @param {Object} builder - The builder used to convert the XML
  * @returns {Object} Returns the collections of films in a XML format
  */
-FilmList.prototype.toXml = function(builder){
-    if(this.films && builder){
+FilmList.prototype.toXml = function(){
+    if(this.films && this.films.length > 0){
         // Build object to simulate how XML would be structured
         var xmlObj = {};
         xmlObj.programmeList = {};
         xmlObj.programmeList.programme = this.films;
 
-        var filmXml = builder.buildObject(xmlObj);
-        return filmXml;
+        return builder.buildObject(xmlObj);
     }
 
     return null;

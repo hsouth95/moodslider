@@ -1,7 +1,31 @@
 doctype html
 html
   head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
     title= title
+    link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Ubuntu")
+    link(rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css")
+    link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-min.css")
+    link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header(role="banner")
+            div.pure-g
+                div.logo.pure-u-1-5
+                    img(src="images/sky-logo.png")
+                div.pure-u-4-5
+                    h1.title Moodslider
+                    nav(role="navigation") Home / Upload
+    div#body-wrapper
+        block content
+    
+    script(src="//code.jquery.com/jquery-1.12.4.js")
+    script(src="//code.jquery.com/ui/1.12.1/jquery-ui.js")
+    script.
+        $(function(){
+            $(".slider").slider({
+                max: 10,
+                value: 5
+            });
+        });

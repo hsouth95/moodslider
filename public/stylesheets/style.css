@@ -1,8 +1,93 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Ubuntu', sans-serif;
+  color: #333333;
+  margin: 0;
+  height: 100%;
+  font-weight: bold;
 }
 
 a {
   color: #00B7FF;
+}
+
+header {
+    border-bottom: 2px solid rgb(0, 115, 197);
+    background-color: #ffffff;
+}
+
+nav {
+    height: 50%;
+    padding-left: 50px;
+    font-size: 25px;
+    color: rgb(0, 115, 197);
+}
+.pure-g > div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.logo img {
+    max-height: 200px;
+    height: auto;
+}
+
+.mood-value {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+}
+.mood-value-high {
+    text-align: right;
+}
+
+
+.title {
+    text-align: center;
+    font-size: 50px;
+    height: 50%;
+    font-family: 'Ubuntu', sans-serif; /* Override 'pure' css */
+    color: rgb(0, 115, 197);
+}
+
+.sliders {
+    margin-bottom: 50px;
+}
+.slider {
+    margin-bottom: 50px;
+}
+
+.films {
+    background-color: #fff;
+    padding: 15px;
+    border: 2px solid rgb(0, 115, 197);
+}
+
+.film-img {
+    max-height: 200px;
+    max-width: 200px;
+    display:block;
+    margin-bottom: 10px;
+}
+.film-title {
+    max-width: 200px;
+}
+
+#body-wrapper {
+    background-image: radial-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 30%, rgb(229, 229, 235) 54%, rgb(201, 199, 209) 71%);
+    height: 100%;
+    padding: 100px;
+}
+
+/* Override jQuery UI Slider styles */
+.ui-widget-content {
+    background: rgb(0, 115, 197);
+}
+
+.ui-slider-handle:hover {
+    cursor: pointer;
+}
+
+.ui-state-active {
+    background: #c5c5c5 !important;
 }

@@ -6,7 +6,7 @@
 /**
  * Represents a film.
  * @constructor
- * @param {Object} options - An object of the film options
+ * @param {Object} [options] - An object of the film options
  */
 var Film = function(options) {
     this.name = options.name || null;

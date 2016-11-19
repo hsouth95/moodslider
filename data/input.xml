@@ -1,18 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
- <programmeList>
- <programme id="1">
- <name>Alice in Wonderland</name>
- <image>images/alice_in_wonderland.jpg</image>
- <mood>Calm</mood>
- </programme>
- <programme id="2">
- <name>Avatar</name>
- <image>images/avatar.jpg</image>
- <mood>Fearless</mood>
- </programme>
- <programme id="3">
- <name>Bruce Almighty</name>
- <image>images/bruceAlmighty.jpg</image>
- <mood>Tired</mood>
- </programme>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<programmeList>
+  <programme id="1">
+    <name>yolo</name>
+    <mood>
+      <calmLevel>2</calmLevel>
+      <sadnessLevel>1</sadnessLevel>
+      <awakeLevel>1</awakeLevel>
+      <courageLevel>3</courageLevel>
+    </mood>
+    <image>data/images/20160314_132016.jpg</image>
+  </programme>
+  <programme id="2">
+    <name>yolo</name>
+    <mood>
+      <calmLevel>2</calmLevel>
+      <sadnessLevel>1</sadnessLevel>
+      <awakeLevel>1</awakeLevel>
+      <courageLevel>3</courageLevel>
+    </mood>
+    <image>data/images/20160314_132016.jpg</image>
+  </programme>
+  <programme id="3">
+    <name>yolo</name>
+    <mood>
+      <calmLevel>2</calmLevel>
+      <sadnessLevel>1</sadnessLevel>
+      <awakeLevel>1</awakeLevel>
+      <courageLevel>3</courageLevel>
+    </mood>
+    <image>data/images/20160314_132016.jpg</image>
+  </programme>
+  <programme id="4">
+    <name>yolo</name>
+    <mood>
+      <calmLevel>2</calmLevel>
+      <sadnessLevel>1</sadnessLevel>
+      <awakeLevel>1</awakeLevel>
+      <courageLevel>3</courageLevel>
+    </mood>
+    <image>data/images/20160314_132016.jpg</image>
+  </programme>
+  <programme id="5">
+    <name>yolo</name>
+    <mood>
+      <calmLevel>2</calmLevel>
+      <sadnessLevel>1</sadnessLevel>
+      <awakeLevel>1</awakeLevel>
+      <courageLevel>3</courageLevel>
+    </mood>
+    <image>data/images/20160314_132016.jpg</image>
+  </programme>
 </programmeList>
